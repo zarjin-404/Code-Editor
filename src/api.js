@@ -3,7 +3,7 @@ import { LANGUAGE_VERSIONS } from "./constants";
 
 const API = axios.create({
   baseURL: "https://emkc.org/api/v2/piston",
-  timeout: 10000, // Add timeout to prevent hanging requests
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -24,7 +24,7 @@ export const executeCode = async (language, sourceCode) => {
       version: LANGUAGE_VERSIONS[language],
       files: [
         {
-          name: "main", // Add filename
+          name: "main",
           content: sourceCode,
         },
       ],
@@ -32,7 +32,6 @@ export const executeCode = async (language, sourceCode) => {
 
     return response.data;
   } catch (error) {
-    // Enhance error handling
     if (error.response) {
       throw new Error(
         `API Error: ${error.response.data.message || "Execution failed"}`
